@@ -1,0 +1,42 @@
+<%= form_for @actu do |f| %>
+
+<div class="control-group">
+    <%= f.label :titre, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :titre, :class => 'text_field' %>
+    </div>
+  </div>
+
+<div class="control-group">
+    <%= f.label :texte, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :texte, :class => 'text_area', :rows => '5' %>
+    </div>
+  </div>
+  
+  <%= f.fields_for :actu_images do |iform| %>
+        <% render 'actu_image_fields', :f => iform %>
+        <% end %>
+        <p><%= link_to_add_fields "Add image", f, :actu_images %></p>  
+
+
+  <%= f.fields_for :videos do |vform| %>
+        <% render 'video_fields', :f => vform %>
+        <% end %>
+        <p><%= link_to_add_fields "Add video", f, :videos %></p>
+
+
+  <%= f.fields_for :liens do |lform| %>
+        <% render 'lien_fields', :f => lform %>
+        <% end %>
+        <p><%= link_to_add_fields "Add lien", f, :liens %></p>
+
+
+  
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                actus_path, :class => 'btn' %>
+  </div>
+<% end %>

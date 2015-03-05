@@ -1,0 +1,10 @@
+ <div class="control-group">
+    <%= f.label :partenaire, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :description, :class => 'text_area', :rows => '4' %><br>
+      <%= f.file_field :image %><br>
+      <%= f.label :lien %>
+      <%= f.text_field :link %>
+    </div>
+    <%= f.check_box '_destroy' %><p>Remove</p>
+  </div>

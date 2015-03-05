@@ -1,0 +1,29 @@
+<%= form_for @entreprise do |f| %>
+
+<div class="control-group">
+    <%= f.label :type, :class => 'control-label' %>
+    <div class="controls">
+  <%= f.select :sort, [['Parrain', 1], ['Ecole', 2], ['Entrepreneur', 3]] %>
+  </div>
+  </div>
+
+<div class="control-group">
+    <%= f.label :lien, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :lien, :class => 'text_field' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :image, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.file_field :image %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                entreprises_path, :class => 'btn' %>
+  </div>
+<% end %>

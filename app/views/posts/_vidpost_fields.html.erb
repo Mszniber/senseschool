@@ -1,0 +1,14 @@
+ <div class="control-group">
+    <%= f.label :type_video, :class => 'control-label' %>
+    <div class="controls">
+  <%= f.select :youvim, [['Youtube', true], ['Vimeo', false]] %>
+  </div>
+  </div>
+
+ <div class="control-group">
+    <%= f.label :video, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :link, :class => 'text_field' %>
+    </div>
+    <%= f.check_box '_destroy' %><p>Remove</p>
+  </div>

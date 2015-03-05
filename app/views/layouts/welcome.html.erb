@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SenseSchool</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+  <meta name="robots" content="NOODP">
+</head>
+<body>
+
+	
+	
+
+	<div class="container">
+		<div class="row">
+			<div class="row">
+				<div class="span2"></div>
+				<div class="span5"><%=image_tag("bonhss.png", alt: "Example Image", :align=> "middle")%></div>
+				<div class="span3"><%= yield %></div>
+				<div class="span1"></div>
+				
+		</div>
+	</div>
+
+	</div>
+
+
+
+</body>
+</html>

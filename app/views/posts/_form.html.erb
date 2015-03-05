@@ -1,0 +1,151 @@
+<%= form_for @post, :html => { :class => 'form-horizontal' }, :html => { :multipart => true } do |f| %>
+
+<div class="tabbable">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#tab1" data-toggle="tab">Présentation</a></li>
+    <li><a href="#tab2" data-toggle="tab">Partenaires</a></li>
+    <li><a href="#tab3" data-toggle="tab">Modalités</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div class="tab-pane active" id="tab1">
+
+      <div class="control-group">
+        <%= f.label :titre, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :title, :class => 'text_field' %>
+          <%= f.file_field :image %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= f.label :entrepreneur_id, :class => 'control-label' %>
+        <div class="controls">
+         <%= f.select(:entrepreneur_id, Entrepreneur.all.map {|r| [r.nom,r.id] }) %>
+       </div>
+     </div>
+     
+     <div class="control-group">
+      <%= f.label :inscriptions, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select :open, [['Ouvertes', true], ['Fermées', false]] %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :deadline_inscriptions, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :dfins, :class => 'datepicker' %>
+      </div>
+    </div> 
+    
+    <div class="controls">
+      <%= f.check_box :term %> Projet terminé
+    </div>
+    <div class="control-group">
+      <%= f.label :defi, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_area :defi, :class => 'text_area', :rows => '3' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :details, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_area :mission, :class => 'text_area', :rows => '5' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :categorie_id, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select(:categorie_id, Categorie.all.map {|r| [r.nom,r.id] }) %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :video_fin, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :link, :class => 'text_field' %>
+      </div>
+    </div>
+    <%= f.fields_for :vidposts do |vform| %>
+    <% render 'vidpost_fields', :f => vform %>
+    <% end %>
+    <p><%= link_to_add_fields "Add video", f, :vidposts %></p>
+
+  </div>
+
+  <div class="tab-pane" id="tab2">
+
+
+    
+    <%= f.fields_for :partenaires do |pform| %>
+    <% render 'partenaire_fields', :f => pform %>
+    <% end %>
+    <p><%= link_to_add_fields "Add Partenaire", f, :partenaires %></p>
+    
+
+  </div>
+  <div class="tab-pane" id="tab3">
+
+
+    <div class="control-group">
+      <%= f.label :competences_requises, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_area :competences, :class => 'text_area', :rows => '5' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :a_gagner, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_area :gain, :class => 'text_area', :rows => '5' %>
+      </div>
+    </div>
+    <div class="control-group">
+        <%= f.label :planning, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.file_field :calendar %>
+        </div>
+      </div>
+    <div class="control-group">
+      <%= f.label :date_debut, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :date_debut, :class => 'datepicker' %>
+      </div>
+    </div> 
+    <div class="control-group">
+      <%= f.label :date_fin, :class => 'control-label' %>
+      <div class="controls">
+       <%= f.text_field :date_fin, :class => 'datepicker' %>
+     </div>
+   </div>
+   <div class="control-group">
+    <%= f.label :chaine_youtube, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :lieny, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :dropbox, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :liendb, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :lien_inscription, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :liengf, :class => 'text_field' %>
+    </div>
+  </div>
+
+</div>
+
+</div>
+
+
+</div>
+
+<div class="form-actions">
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+  posts_path, :class => 'btn' %>
+</div>
+<% end %>
+</div>

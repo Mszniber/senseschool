@@ -1,0 +1,130 @@
+<div class="page-header"><h3>Qui sommes-nous ?</h3></div>
+
+<div class="tabbable">
+	<ul class="nav nav-tabs">
+		<li class="active"><a href="#tab1" data-toggle="tab">À propos</a></li>
+		<li><a href="#tab2" data-toggle="tab">Activités</a></li>
+		<li><a href="#tab3" data-toggle="tab">Témoignages</a></li>
+		<li><a href="#tab4" data-toggle="tab">MakeSense</a></li>
+	</ul>
+
+	<div class="tab-content">
+		<div class="tab-pane active" id="tab1">
+
+			<div class="row">
+				<div class="span4"><%=image_tag("sseco.png")%></div>
+			</div>
+
+			<h4>Notre Vision</h4>
+			<p>Transformer l’éducation pour que chacun soit capable de résoudre les défis <br>sociaux environnementaux de notre époque.</p>
+
+			<h4>Notre Mission</h4>
+			<p>Créer des expériences pour réunir de multiples parties prenantes dans la <br>résolution de défis sociaux environnementaux.
+			</p>
+
+			<h4>Notre Activité</h4>
+			<p>Créer et animer des programmes de résolution de défis d’entrepreneurs <br>sociaux en partenariat avec des institutions académiques ou en <br>constituant des équipes sur appel à candidature.</p>
+
+		</div>
+
+
+		<div class="tab-pane" id="tab2">
+			<p>Decouvrez nos différents programmes</p>
+
+
+			<div class="row">
+				<div class="span3">
+					<%=image_tag("senseac.png")%>
+				</div>
+			</div><br>
+			<p>Les <i>SenseAcademies</i> sont des programmes dédiés à la résolution du défi <br>d’un entrepreneur social. Une équipe pluri-disciplinaire est sélectionnée et <br>accompagnée au terme d’un appel à candidature publié sur notre site. <br><%= link_to "Voir tous les programmes en cours", posts_path %></p>
+
+			<div class="row">
+				<div class="span3">
+					<%=image_tag("senseclass.png")%>
+				</div>
+			</div><br>
+			<p>Les <i>SenseClass</i> sont des programmes dédiés à la résolution du défi d’un <br>entrepreneur social. Ces programmes sont réservés aux étudiants dans le <br>cadre de cursus académiques variés. <%= link_to "Voir tous les programmes en cours", posts_path %></p>
+
+			<div class="row">
+				<div class="span3">
+					<%=image_tag("sensesem.png")%>
+				</div>
+			</div><br>
+			<p>Les <i>SenseSeminar</i> sont des programmes courts intégrés à un séminaire. <br>Ils sont destinés à un plus grand nombre de participants sur une durée plus <br>courte que les SenseClass et SenseAcademies et ont vocation à <br>sensibiliser un large public. <a href="http://www.escpeurope.eu/nc/media-news/news-newsletter/news-single/article/avec-senseschool-les-etudiants-de-escp-europe-relevent-des-defis-socio-environnementaux/">Hacker un seminaire avec SenseSchool</a></p>
+		</div>
+
+		<div class="tab-pane" id="tab3">
+			
+
+			
+				<% if user_signed_in? %>
+				<%= link_to t('.new', :default => t("helpers.links.new")),
+				new_temoin_path,
+				:class => 'btn btn-primary' %>
+				<% end %>
+				<% @temoins.each do |temoin| %>
+				<div class="row">
+					<div class="span1">
+						<p><%= image_tag temoin.image.url(:icone) %></p>
+						
+					</div>
+					<div class="span4">
+						<strong><%= temoin.nom %></strong>, <%= temoin.rang %>
+						<font size="3"><p>"<%= temoin.phrase %>"</p></font>
+						
+					</div>
+					<div class="span2">
+						<%= image_tag temoin.imagecole.url(:icone) %>
+					</div>
+				
+				</div>
+				
+				
+				<% if user_signed_in? %>
+				<%= link_to t('.edit', :default => t("helpers.links.edit")),
+				edit_temoin_path(temoin), :class => 'btn btn-mini' %>
+				<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+				temoin_path(temoin),
+				:method => :delete,
+				:data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+				:class => 'btn btn-mini btn-danger' %>
+				<% end %>
+				<div class="page-header"></div>
+				<% end %>
+			
+		</div>
+
+
+		<div class="tab-pane" id="tab4">
+			<div class="row">
+				<div class="span1">
+					<a href="http://we.makesense.org/?page_id=1305"><%=image_tag("poweredby.jpg")%></a>
+				</div>
+			</div>
+			
+
+			<p>SenseSchool est une entreprise powered by MakeSense. <a href="http://we.makesense.org/?page_id=1305">En savoir plus</a></p>
+
+			<div class="row">
+				<div class="span3">
+					<a href="http://beta.makesense.org/"><%=image_tag("makesense.png")%></a>
+				</div>
+			</div>
+
+			<br>
+
+			
+			
+
+
+			<p>
+				MakeSense est un projet ouvert créé par un « gang » d’amis Facebook. <br>Notre but est d’aller à la rencontre d’entrepreneurs sociaux et collecter <br>leurs défis en les connectant à des individus. Ils révèlent ainsi leurs pouvoirs<br> en apportant leur aide via <a href="http://beta.makesense.org/">une plateforme internet</a> et des <a href="http://agenda.makesense.org/">événements partout <br>sur la planète</a>.<br><br>
+				Créée par des membres de la communauté MakeSense, SenseSchool <br>est une SAS dont les revenus profitent au développement de la communauté : <br>nous finançons certains de ses événements et frais de fonctionnement et <br>consacrons 20% de notre temps de travail à MakeSense.
+			</p>
+
+		</div>
+
+	</div>
+</div>
+

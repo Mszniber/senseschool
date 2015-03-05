@@ -1,0 +1,56 @@
+<%- model_class = Post -%>
+<div class="page-header">
+  <h3>Programmes ouverts</h3>
+  <% if user_signed_in? %>
+  <%= link_to t('.new', :default => t("helpers.links.nouveau_projet")),
+  new_post_path,
+  :class => 'btn btn-primary btn-large' %>
+  <% end %>
+</div>
+
+<font size="4"><p><strong><i>Trouvez le programme qui vous correspond et postulez !</i></p></font>
+
+
+
+
+
+<div class="tab-content">
+  <% Categorie.all.each do |c| %>
+  <div class="tab-pane active" id='tab<%= c.id %>'>
+    
+    
+    <% @posts.each do |post| %>
+
+    <% if post.categorie_id == c.id %>
+    <table class="table">
+      <thead>
+      </thead>
+      <tbody>
+        
+        <% if post.open == true %>
+        <tr>
+          <td><%= link_to image_tag(post.image.url), post_path(post) %></td>
+        </div>
+        <td><% if user_signed_in? %>
+          <%= link_to t('.edit', :default => t("helpers.links.editer")),
+          edit_post_path(post), :class => 'btn btn-mini' %>
+          
+
+          
+          <%= link_to t('.destroy', :default => t("helpers.links.supprimer")),
+          post_path(post),
+          :method => :delete,
+          :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+          :class => 'btn btn-mini btn-danger' %>
+          <% end %>  
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% end %>
+  <% end %>
+</div>
+<% end %>
+</div>
+

@@ -1,0 +1,145 @@
+<%- model_class = Post -%>
+<div class="page-header"></h1>
+  <%= image_tag(@post.image.url) %>
+</div>
+
+<div class="tabbable">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#tab1" data-toggle="tab">Présentation</a></li>
+    <li><a href="#tab2" data-toggle="tab">Partenaires</a></li>
+    <li><a href="#tab3" data-toggle="tab">Modalités</a></li>
+    <% if @post.open == true %>
+    <li><a href="#tab4" data-toggle="tab">Planning</a></li>
+    <li><a href="#tab5" data-toggle="tab">Inscription</a></li>
+    <% end %>
+    <% if @post.term == true %>
+    <li><a href="#tab6" data-toggle="tab">Bilan du projet</a></li>
+    <% end %>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="tab1">
+
+
+
+      <h4><%= link_to @post.entrepreneur.nom, @post.entrepreneur.lien %></h4>
+      <% for ent_image in @post.entrepreneur.ent_images %>
+      <%= image_tag ent_image.image.url %><br>
+      <% end %>
+
+
+      <% for vident in @post.entrepreneur.vidents %>
+      <% if vident.youvim == true %>
+      <iframe width="560" height="315" src="http://www.youtube.com/embed/<%= vident.link %>" frameborder="0" allowfullscreen></iframe><br>
+      <% else %>
+      <iframe src="http://player.vimeo.com/video/<%= vident.link %>" width="560" height="315" frameborder="0" allowFullScreen></iframe><br>
+      <% end %>
+      <% end %>
+      <br>
+      <div class="row">
+        <div class="span6">
+      <p><%= @post.entrepreneur.description %></p>
+      <p><%= @post.entrepreneur.nbp %> <%= link_to "ici", @post.entrepreneur.lien2 %></p>
+    </div>
+  </div>
+      
+
+  <div class="row">
+        <div class="span6">
+      <font color="#08c"><h4><strong>Le défi</strong><br></h4></font>
+      <p><%= @post.defi %></p>
+    </div>
+  </div>
+      <% for vidpost in @post.vidposts %>
+      
+      <% if vidpost.youvim == true %>
+      <iframe width="560" height="315" src="http://www.youtube.com/embed/<%= vidpost.link %>" frameborder="0" allowfullscreen></iframe>
+      <% else %>
+      <iframe src="http://player.vimeo.com/video/<%= vidpost.link %>" width="560" height="315" frameborder="0" allowFullScreen></iframe>
+      <% end %>
+      <% end %><br>
+      <div class="row">
+        <div class="span6">
+      <font color="#08c"><h4><strong>Détails</strong></h4></font>
+      <p><%= @post.mission %></p>
+    </div>
+  </div>
+      
+
+    </div>
+    <div class="tab-pane" id="tab2">
+
+      
+      
+
+      <% for partenaire in @post.partenaires %>
+      <div class="span1">
+        <%= link_to (image_tag partenaire.image.url(:icone)), partenaire.link %></div>
+        <div class="span5"><p><%= partenaire.description %></p></div>
+      
+      <% end %>
+      
+
+    </div>
+    <div class="tab-pane" id="tab3">
+
+     <div class="row">
+        <div class="span6">
+      <font color="#08c"><h4><strong>Compétences requises</strong></h4></font>
+      <p><%= @post.competences %></p>
+      <font color="#08c"><h4><strong>Récompense</strong></h4></font>
+      <p><%= @post.gain %></p>
+      <p><strong><h4><font color="#08c">Début du programme</font></h4></strong>
+        <%= @post.date_debut.strftime("%d/%m/%Y") %></p>
+        <p><strong><h4><font color="#08c">Fin du programme</font></h4></strong></dt>
+          <%= @post.date_fin.strftime("%d/%m/%Y") %></p>
+        </div>
+      </div>
+          
+        </div>
+        
+
+        <% if @post.open == true %>
+        <div class="tab-pane" id="tab4">
+          <p>Voici un planning non-exhaustif du programme :</p><br>
+          <%= image_tag @post.calendar.url %><br>
+          <p>N'hésitez pas à postuler même si vous pensez être absents à une de ces dates, le planning est sujet à modifications</p>
+        </div>
+
+
+        <div class="tab-pane" id="tab5">
+          <p>Complétez et envoyez le formulaire suivant avant le  <%= @post.dfins.strftime("%d/%m/%Y") %> </p>
+            <iframe src="<%= @post.liengf %>?embedded=true" width="560" height="315" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+          </div>
+          <% end %>
+
+
+          <% if @post.term == true %>
+          <div class="tab-pane" id="tab6">
+            <p>Retour en images sur le projet !</p><br><br><br>
+            <iframe src="http://player.vimeo.com/video/<%= @post.link %>" width="560" height="315" frameborder="0" allowFullScreen></iframe>
+          </div>
+          <% end %>
+
+          
+
+
+        </div>
+      </div>
+
+
+      
+      
+
+      
+        <%= link_to t('.back', :default => t("helpers.links.retour")),
+        posts_path, :class => 'btn'  %>
+        <% if user_signed_in? %>
+        <%= link_to t('.edit', :default => t("helpers.links.editer")),
+        edit_post_path(@post), :class => 'btn' %>
+        <%= link_to t('.destroy', :default => t("helpers.links.supprimer")),
+        post_path(@post),
+        :method => 'delete',
+        :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+        :class => 'btn btn-danger' %>
+        <% end %>
+
